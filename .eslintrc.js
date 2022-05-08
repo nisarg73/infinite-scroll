@@ -21,5 +21,6 @@ module.exports = {
     'no-console': 0,
     'object-curly-newline': 0,
     'no-unused-vars': 0,
+    'function-paren-newline': 0,
   },
 };

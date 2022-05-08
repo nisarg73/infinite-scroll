@@ -1,3 +1,12 @@
 .main {
   width: 100%;
 }
+
+.table-overflow {
+  display: block;
+  width: auto;
+}
+
+.table-margin {
+  margin: 2em 1em;
+}
