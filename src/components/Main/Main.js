@@ -1,5 +1,6 @@
 /* eslint-disable object-curly-newline */
 import { useState, useCallback, useRef } from 'react';
+import { isBrowser } from 'react-device-detect';
 import { Table, TableBody, Image, Search } from 'semantic-ui-react';
 
 import useFetch from '../../hooks/useFetch';
@@ -61,16 +62,20 @@ function Main() {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell textAlign="center">Sr.</Table.HeaderCell>
-              <Table.HeaderCell
-                textAlign="center"
-                sorted={table.clickedColumn === 'id' ? table.direction : null}
-                onClick={handleSort('id')}
-              >
-                ID
-              </Table.HeaderCell>
+              {isBrowser && (
+                <Table.HeaderCell
+                  textAlign="center"
+                  sorted={table.clickedColumn === 'id' ? table.direction : null}
+                  onClick={handleSort('id')}
+                >
+                  ID
+                </Table.HeaderCell>
+              )}
               <Table.HeaderCell textAlign="center">Name</Table.HeaderCell>
 
-              <Table.HeaderCell textAlign="center">Image</Table.HeaderCell>
+              <Table.HeaderCell collapsing textAlign="center">
+                Image
+              </Table.HeaderCell>
               <Table.HeaderCell
                 textAlign="center"
                 sorted={
@@ -80,15 +85,17 @@ function Main() {
               >
                 Market Cap
               </Table.HeaderCell>
-              <Table.HeaderCell
-                textAlign="center"
-                sorted={
-                  table.clickedColumn === 'volume' ? table.direction : null
-                }
-                onClick={handleSort('volume')}
-              >
-                Volume
-              </Table.HeaderCell>
+              {isBrowser && (
+                <Table.HeaderCell
+                  textAlign="center"
+                  sorted={
+                    table.clickedColumn === 'volume' ? table.direction : null
+                  }
+                  onClick={handleSort('volume')}
+                >
+                  Volume
+                </Table.HeaderCell>
+              )}
             </Table.Row>
           </Table.Header>
           <TableBody>
@@ -97,17 +104,21 @@ function Main() {
                 <Table.Cell collapsing textAlign="center">
                   {filterCryptos.indexOf(element) + 1}
                 </Table.Cell>
-                <Table.Cell collapsing textAlign="center">
-                  {element.id}
-                </Table.Cell>
+                {isBrowser && (
+                  <Table.Cell collapsing textAlign="center">
+                    {element.id}
+                  </Table.Cell>
+                )}
                 <Table.Cell textAlign="center">{element.name}</Table.Cell>
                 <Table.Cell textAlign="center">
                   <Image src={element.image} avatar />
                 </Table.Cell>
                 <Table.Cell textAlign="center">{element.market_cap}</Table.Cell>
-                <Table.Cell textAlign="center">
-                  {element.total_volume}
-                </Table.Cell>
+                {isBrowser && (
+                  <Table.Cell textAlign="center">
+                    {element.total_volume}
+                  </Table.Cell>
+                )}
               </Table.Row>
             ))}
           </TableBody>
