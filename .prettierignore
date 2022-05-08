@@ -1,0 +1,8 @@
+# production
+/build
+
+# testing
+/coverage
+
+# Ignore all HTML files:
+*.html
